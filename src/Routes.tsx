@@ -1,6 +1,6 @@
 import { BrowserRouter as Brouter, Routes as RouteContainer, Route } from "react-router-dom";
 import { Home } from "./Pages/Home";
-import { Adm } from "./Pages/AdmPage";
+import { Adm } from "./Pages/AdmLogin";
 
 export function Routes() {
     return(<>

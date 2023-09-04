@@ -18,6 +18,9 @@ export function AdmComp() {
 
     const handleClickShowPassword = () => showPassword1((show) => !show);
 
+    function fun() {
+      AdmLogin(email, password)
+    }
     return(<>
           <Box sx={{
             minHeight: '80vh',
@@ -60,7 +63,7 @@ export function AdmComp() {
             label="Password"
           />
         </FormControl>
-        <Btn name='continue>>' fun={AdmLogin(email, password)} ml='15vw' Mt='5vh'></Btn>
+        <Btn name='continue>>' fun={fun} ml='15vw' Mt='5vh'></Btn>
             </Box>
         </Box>
 </>)}

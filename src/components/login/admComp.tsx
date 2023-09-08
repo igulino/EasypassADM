@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -10,17 +10,24 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Btn } from '../Button';
 import { AdmLogin } from './connections';
+import { useNavigate } from 'react-router-dom';
 
 export function AdmComp() {
+    const navigator = useNavigate();
     const [showPassword, showPassword1] = useState(false);
     const [password, setpassword] = useState('');
     const [email, setemail] = useState('');
-
     const handleClickShowPassword = () => showPassword1((show) => !show);
 
-    function fun() {
-      AdmLogin(email, password)
-    }
+    async function fun() {
+      var sa = AdmLogin(email, password);
+      const prom = Promise.resolve(sa);
+      prom.then((value) => {
+        console.log(value);
+        navigator(value)
+      });
+    };
+    
     return(<>
           <Box sx={{
             minHeight: '80vh',

@@ -2,6 +2,7 @@ import { BrowserRouter as Brouter, Routes as RouteContainer, Route } from "react
 import { Home } from "./Pages/Home";
 import { Adm } from "./Pages/AdmLogin";
 import { AdmHome } from "./Pages/AdmHome";
+import { Enterprise } from "./Pages/AdmEmpresas";
 
 export function Routes() {
     return(<>
@@ -14,6 +15,7 @@ export function Routes() {
         {/*home*/}
             <RouteContainer>
                 <Route path="/admhome" element={<AdmHome/>}></Route>
+                <Route path="Sistema/empresas" element={<Enterprise/>}></Route>
             </RouteContainer>
         </Brouter>
     </>)

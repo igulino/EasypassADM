@@ -37,10 +37,10 @@ export function AdmComp() {
             flexDirection: 'column',
             alignItems: 'center',
             marginLeft: '5vw',
-            border: 1,
+      
         }}>
             <Box sx={{
-                backgroundColor: 'red',
+                boxShadow: 3,
                 minHeight: '60vh',
                 minWidth: '30vw',
                 margin: '5vw',
@@ -49,7 +49,7 @@ export function AdmComp() {
                 flexDirection: 'column',
                 alignItems: 'center',
             }}>
-                <TextField variant='standard' onChange={(i) => setemail(i.target.value)} sx={{m: 5, width: '25ch'}} ></TextField>
+                <TextField variant='standard' onChange={(i) => setemail(i.target.value)} sx={{m: 5, width: '25ch'}} label='Email'></TextField>
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput

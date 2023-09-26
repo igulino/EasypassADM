@@ -3,6 +3,7 @@ import { Home } from "./Pages/Home";
 import { Adm } from "./Pages/AdmLogin";
 import { AdmHome } from "./Pages/AdmHome";
 import { Enterprise } from "./Pages/AdmEmpresas";
+import { Sac } from "./Pages/Sac";
 
 export function Routes() {
     return(<>
@@ -16,6 +17,7 @@ export function Routes() {
             <RouteContainer>
                 <Route path="/admhome" element={<AdmHome/>}></Route>
                 <Route path="Sistema/empresas" element={<Enterprise/>}></Route>
+                <Route path="Sistema/Sac" element={<Sac/>}></Route>
             </RouteContainer>
         </Brouter>
     </>)

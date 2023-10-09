@@ -2,6 +2,7 @@ import { Box, TextField, Card} from "@mui/material";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react"
 import ModalContext from "../../../context/Modalcontext";
+import { TakeTicket } from "../../../props";
 
 export function Chat() {
   const { Ticket, setTicket } = useContext(ModalContext);
@@ -10,7 +11,6 @@ export function Chat() {
   const [ perfil, setPerfil ] = useState('');
   const [ test, SetTest ] = useState([]);
   const [ ft, Setft ] = useState([]);
-  const [ ticketN, SetTicketN ] = useState(Array);
 
   setTimeout(() =>{
     takeMenData()
@@ -20,33 +20,19 @@ export function Chat() {
     async function takeMenData() {
         
         SetmenTicket(await axios.get('http://localhost:3345/admSac'));
-       
+        if (menTicket.data != undefined) {
+          SetTest(menTicket.data.lastMen);
+          Setft(menTicket.data.perfil);
+          console.log('this is ft: ', ft);
+          
+          console.log('this is menticket: ', menTicket.data);
+        };
     }
     
   useEffect(() =>{
-      if (menTicket.data != undefined) {
-        SetTest(menTicket.data.lastMen);
-        Setft(menTicket.data.perfil);
-        console.log('this is ft: ', ft);
-        
-      };
+     
   }, [menTicket]);
 
-    console.log('this is menticket: ', menTicket.data);
-    async function name() {
-      try {
-        if (ticketN != null) {
-
-          setTicket?.(ticketN);
-          console.log('é u: ', Ticket);
-          
-        }
-      } catch (error) {
-        console.log(error);
-        
-      }
-     
-    }
     
   return (
     <>
@@ -65,8 +51,8 @@ export function Chat() {
           test.slice().reverse().map((x, index) => {
             
             return (
-              <Card
-                onClick={() =>{SetTicketN(x.sac_sac_ticket), name()}}
+              <Card 
+                onClick={() =>{TakeTicket({cast: x.sac_sac_ticket})}}
                 key={x.sac_sac_ticket}
                 sx={{
                   height: '10vh',

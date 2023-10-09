@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export async function AdmLogin(email: any, password: any) {
 
-    const resp = await axios.post('http://127.0.0.1:3344/admlogin', {
+    const resp = await axios.post('http://localhost:3345/admlogin', {
         email: email,
         password: password
     })

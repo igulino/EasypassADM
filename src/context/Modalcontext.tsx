@@ -8,14 +8,15 @@ interface ModalContextType {
     
 }
 const throwNotImplementedError = () => {
-    throw new Error('Function not implemented');
+    console.log('a');
+    
 };
 
 const ModalContext = createContext<ModalContextType>({
     verify: false,
  
-    Ticket: {},
-    setTicket: throwNotImplementedError,
+    Ticket: '',
+    setTicket: () =>{}
     
 });
 

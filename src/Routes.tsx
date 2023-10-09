@@ -9,7 +9,7 @@ import ModalContext  from "./context/modalcontext";
 import { useState } from "react";
 
 export function Routes() {
-    const [Ticket, setTicket] = useState([]);
+    const [Ticket, setTicket] = useState('');
     const [verify, setVerify] = useState(false);
     return(<>
         <Brouter>

@@ -31,36 +31,7 @@ export function Chat() {
         
       };
   }, [menTicket]);
-/*
-  async function ftPerfil(x: any) {
-      const perfilimage = ft.user_FotoPerfil
-      console.log(perfilimage);
 
-      if (perfilimage) {
-          const response = await axios.post(
-            'http://localhost:3344/user/returnperfil',
-              {
-                filename: perfilimage,
-              },
-              {
-                responseType: 'arraybuffer',
-              }
-              );
-
-              const arrayBufferView = new Uint8Array(response.data);
-              const blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
-
-              const reader = new FileReader();
-              reader.readAsDataURL(blob);
-              reader.onloadend = () => {
-              setPerfil(reader.result) // A URL Base64 será armazenada em imageUrlWithPrefix
-                console.log(response.data);
-                console.log(perfil);
-              };
-              return perfil
-            }}
-    
-   */
     console.log('this is menticket: ', menTicket.data);
     async function name() {
       try {
@@ -104,7 +75,7 @@ export function Chat() {
                   zIndex: 1,
                   mt: `${index * 15}vh`
                 }}
-              >
+              > 
                 {x.sacmen_texto}
               </Card>
             );

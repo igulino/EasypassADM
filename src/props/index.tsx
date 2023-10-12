@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import axios from "axios";
 
 interface takeTicketProps {
@@ -17,17 +17,24 @@ export class TakeTicket {
 
 export function TakeTicket(cast : takeTicketProps) {
 
-    console.log('this is cast: ', cast.cast);
+    console.log('this is cast aa: ', cast.cast);
     const ticket = cast.cast;
-    communicate()
-    async function communicate() {
-        const take = await axios.post('http://localhost:3345/message', {
+    var take
+    const a = communicate(take);
+    async function communicate(take: any) {
+        take = await axios.post('http://localhost:3345/message', {
             sac_sac_ticket: ticket
         })
 
-        console.log('take take: ', take);
+        console.log('take take: ', take.data);
         
+        return(take)
     }
+
+    console.log(a);
     
-    return(<><Typography>a</Typography></>)
+    return(<>
+        <Box>
+            {}
+        </Box></>)
 }

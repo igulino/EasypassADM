@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import { Chat } from "../components/Home/Sac/chat";
-import { Msg } from "../components/Home/Sac/msg";
-import MenuLateral from "../components/menuLateraal";
-import { MsgBar } from "../components/Home/Sac/MsgBar";
+import { Chat } from "../components/adm/Sac/chat";
+import { Msg } from "../components/adm/Sac/msg";
+import MenuLateral from "../components/adm/menu/menuLateraal";
+import { MsgBar } from "../components/adm/Sac/MsgBar";
 
 export function Sac() {
     return (

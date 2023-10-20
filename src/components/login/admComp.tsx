@@ -8,7 +8,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Btn } from '../Button';
+import { Btn } from '../bases/buttons/Button';
 import { AdmLogin } from './connections';
 import { useNavigate } from 'react-router-dom';
 

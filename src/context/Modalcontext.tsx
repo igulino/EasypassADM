@@ -2,22 +2,26 @@ import { createContext } from 'react';
 
 interface ModalContextType {
     verify: boolean;
-    
+    themes: any; 
+    hasEntered: boolean;
+    setHasEntered: (hasEntered: boolean) => void;
+    admData: any;
+    setAdmData: (admData: any) => void;
     Ticket?: any;
-    setTicket?: (Ticket: any) => void;
-    
+    setTicket?: (ticket: any) => void;
+    fundo?: any
 }
-const throwNotImplementedError = () => {
-    console.log('a');
-    
-};
 
 const ModalContext = createContext<ModalContextType>({
     verify: false,
- 
-    Ticket: '',
-    setTicket: () =>{}
-    
+    themes: '',
+    hasEntered: false,
+    setHasEntered: () => {},
+    admData: null, 
+    setAdmData: () => {},
+    Ticket: null, 
+    setTicket: () => {},
+    fundo: null
 });
 
 export default ModalContext;

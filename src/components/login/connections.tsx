@@ -7,11 +7,28 @@ export async function AdmLogin(email: any, password: any) {
         password: password
     })
     console.log('this is resp: ', resp.data.token);
-    await localStorage.setItem('token', resp.data.token);
+    localStorage.setItem('token', resp.data.token);
 
     if (localStorage.getItem('token') != undefined) {
-        return('/admhome')
+        return('/Sistema')
     }else{
-        return('/adm')
+        return('/')
+    }
+};
+
+
+export async function EmpresaLogin(cnpj: any, password: any) {
+
+    const resp = await axios.post('http://localhost:3344/busslogin', {
+        cnpj: cnpj,
+        password: password
+    })
+    console.log('this is resp: ', resp.data.token);
+    localStorage.setItem('token', resp.data.token);
+
+    if (localStorage.getItem('token') != undefined) {
+        return('/Empresa')
+    }else{
+        return('/')
     }
 };

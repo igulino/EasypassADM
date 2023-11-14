@@ -10,8 +10,8 @@ export async function AdmLogin(email: any, password: any) {
     await localStorage.setItem('token', resp.data.token);
 
     if (localStorage.getItem('token') != undefined) {
-        return('/admhome')
+        return('/Sistema')
     }else{
-        return('/adm')
+        return('/')
     }
 };

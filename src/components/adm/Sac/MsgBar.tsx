@@ -10,6 +10,7 @@ export function MsgBar() {
     socket.connect()
     const [ Msg, SetMsg ] = useState('');
     function name() {
+        socket.connect()
         var token = localStorage.getItem('token');
 
         if (token) {
@@ -24,7 +25,7 @@ export function MsgBar() {
                     console.log(error);
                 }
             })
-        
+            
         };
     }
 

@@ -7,19 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { BtnL } from "../bases/buttons/Button";
 import colors from "../../assets/colors";
 import buscad from "../../assets/buscad.jpg"
+import { AdmLogin } from "../login/connections";
 
 export function HomeComp() {
     const { verify, themes, fundo } = useContext(ModalContext);
     const [showPassword, setShowPassword] = useState(false);
     const [showComponent, setShowComponent] = useState(false);
-    const [error, setError] = useState(false);
-    const [showError, setShowError] = useState(false);
-    const [showErrorEmail, setShowErrorEmail] = useState(false);
     const [loading, setLoading] = useState(false)
     const [disable, setDisable] = useState(false)
-    const [showErrorlog, setShowErrorlog] = useState(false);
-    const [showNull, setShowNull] = useState(false);
-    const [invalidsenha, setInvalidSenha] = useState(false)
     const [cnpj, setCnpj] = useState('');
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,6 +26,14 @@ export function HomeComp() {
         height: "100%",
         objectFit: "cover",
     }));
+    async function fun() {
+        var sa = AdmLogin(email, password);
+        const prom = Promise.resolve(sa);
+        prom.then((value) => {
+          console.log(value);
+          navigate(value)
+        });
+      };
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -175,7 +178,7 @@ export function HomeComp() {
                                     sx={{ fontSize: '14px' }}
                                 />
                             </FormControl>
-                            <BtnL handleLogin={() => { }} loading={loading} dis={disable} name="Entrar" cl={verify ? colors.pm : "white"} bc={verify ? 'white' : undefined} bch={verify ? 'white' : undefined} route={""} mb={undefined} />
+                            <BtnL handleLogin={fun()} loading={loading} dis={disable} name="Entrar" cl={verify ? colors.pm : "white"} bc={verify ? 'white' : undefined} bch={verify ? 'white' : undefined} route={""} mb={undefined} />
                             <Typography sx={{
                                 textAlign: 'center', mt: '20px', color: '#666666', fontSize: {
                                     xs: "2.5vw",

@@ -9,17 +9,27 @@ export function Chat() {
 
   const [ menTicket, SetmenTicket ] = useState('');
   const [ perfil, setPerfil ] = useState('');
+  const [ count, Setcount ] = useState(1);
   const [ test, SetTest ] = useState([]);
   const [ ft, Setft ] = useState([]);
 
-  setTimeout(() =>{
-    takeMenData()
-    
-  }, 6000)
+  setTimeout(() => {
+    Setcount(count + 1)
+    console.log('mds q ódio: ');
+    /*sim eu tenho que dar essa volta toda pra chamar a "call()" pq se n da ruim, ent n tenta colocar o
+    Script de "call()" direto aqui pq o timeout por algum motivo tá chamando a arrow function dele mais de uma vez
+    ai já viu né, começa a fazeer 10.000 reaquisições simultâneas ai n tem sistéma que aguente*/
+  }, 2000)
 
-    async function takeMenData() {
+  useEffect(() =>{
+    console.log('this is ticket: ', Ticket);
+    
+    call()
+  }, [count])
+
+    async function call() {
         
-        SetmenTicket(await axios.get('http://localhost:3345/admSac'));
+        SetmenTicket(await axios.get('http://localhost:3344/admSac'));
         if (menTicket.data != undefined) {
           /*for (let index = 0; index < MessageData.length; index++) {
                 
@@ -46,11 +56,7 @@ export function Chat() {
           console.log('this is menticket: ', menTicket.data);
         };
     }
-    
-  useEffect(() =>{
-     
-  }, [menTicket]);
-
+ 
     
   return (
     <>
@@ -69,7 +75,7 @@ export function Chat() {
           test.map((x, index) => {
             return (
               <Card 
-                onClick={() =>{TakeTicket({cast: x[0].sac_sac_ticket})}}
+                onClick={() =>{setTicket(x[0].sac_sac_ticket)}}
                 key={x[0].sac_sac_ticket}
                 sx={{
                   height: '10vh',

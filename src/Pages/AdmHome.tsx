@@ -1,12 +1,11 @@
-import { AdmHomeComp } from "../components/Home/admHomeComp";
-import Footer from "../components/adm/footer/footer";
-import MenuLateral from "../components/adm/menu/menuLateraal";
+import { AdmHomeComp } from "../components/adm/admHomeComp";
+import MenuLateral from "../components/adm/menu/menuLateral";
 
-export function AdmHome () {
-    return(<>
-    <AdmHomeComp/>
-    <MenuLateral/>
-    <Footer/>
-
-    </>)
+export function AdmHome() {
+    return (
+        <>
+            <AdmHomeComp />
+            <MenuLateral />
+        </>
+    )
 };

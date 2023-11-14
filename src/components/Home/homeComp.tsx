@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { BtnL } from "../bases/buttons/Button";
 import colors from "../../assets/colors";
 import buscad from "../../assets/buscad.jpg"
-import { AdmLogin } from "../login/connections";
+import { AdmLogin, EmpresaLogin } from "../login/connections";
 
 export function HomeComp() {
     const { verify, themes, fundo } = useContext(ModalContext);
@@ -43,6 +43,32 @@ export function HomeComp() {
     const HandleForget = () => {
         navigate('/Cadastro/EsqueciaSenha')
     }
+
+    async function LoginAdm() {
+        setLoading(true)
+        setDisable(true)
+        const result = AdmLogin(email, password);
+        const resolve = Promise.resolve(result);
+        resolve.then((value) => {
+            setLoading(false)
+            setDisable(false)
+            console.log(value);
+            navigate(value)
+        });
+    };
+
+    async function LoginEmpresa() {
+        setLoading(true)
+        setDisable(true)
+        const result = EmpresaLogin(cnpj, password);
+        const resolve = Promise.resolve(result);
+        resolve.then((value) => {
+            setLoading(false)
+            setDisable(false)
+            console.log(value);
+            navigate(value)
+        });
+    };
 
     return (
         <>
@@ -205,31 +231,31 @@ export function HomeComp() {
                                     aqui
                                 </Link>
                                 <Typography sx={{
-                                textAlign: 'center', mt: '20px', color: '#666666', fontSize: {
-                                    xs: "2vw",
-                                    sm: "1.1vw",
-                                    md: "1vw",
-                                    lg: "0.8vw",
-                                    xl: "0.8vw",
-                                },
-                            }}>
-                                Esqueceu sua senha? Clique <Link
-                                    sx={{
-                                        fontSize: {
-                                            xs: "2vw",
-                                            sm: "1.1vw",
-                                            md: "1vw",
-                                            lg: "0.8vw",
-                                            xl: "0.8vw",
-                                        },
-                                    }}
-                                    component="button"
-                                    variant="body2"
-                                    onClick={HandleForget}
-                                >
-                                    aqui
-                                </Link>
-                            </Typography>
+                                    textAlign: 'center', mt: '20px', color: '#666666', fontSize: {
+                                        xs: "2vw",
+                                        sm: "1.1vw",
+                                        md: "1vw",
+                                        lg: "0.8vw",
+                                        xl: "0.8vw",
+                                    },
+                                }}>
+                                    Esqueceu sua senha? Clique <Link
+                                        sx={{
+                                            fontSize: {
+                                                xs: "2vw",
+                                                sm: "1.1vw",
+                                                md: "1vw",
+                                                lg: "0.8vw",
+                                                xl: "0.8vw",
+                                            },
+                                        }}
+                                        component="button"
+                                        variant="body2"
+                                        onClick={HandleForget}
+                                    >
+                                        aqui
+                                    </Link>
+                                </Typography>
                                 .
                             </Typography>
                         </Container>
@@ -336,7 +362,7 @@ export function HomeComp() {
                                     />
                                 </FormControl>
                             </form>
-                            <BtnL name="Enviar" loading={loading} dis={disable} handleLogin={() => { }} cl={verify ? colors.pm : "white"} bc={verify ? 'white' : undefined} bch={verify ? 'white' : undefined} route={""} />
+                            <BtnL name="Enviar" loading={loading} dis={disable} handleLogin={LoginEmpresa} cl={verify ? colors.pm : "white"} bc={verify ? 'white' : undefined} bch={verify ? 'white' : undefined} route={""} />
                             <Typography sx={{
                                 textAlign: 'center', mt: '20px', color: '#666666', fontSize: {
                                     xs: "2.5vw",

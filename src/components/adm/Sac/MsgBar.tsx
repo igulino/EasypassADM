@@ -1,25 +1,30 @@
 import { Box, Card, TextField } from "@mui/material";
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Btn } from "../../bases/buttons/Button";
 import { socket } from "../../../socket.io";
 import jwt_decode from "jwt-decode";
+import ModalContext from "../../../context/Modalcontext";
 import axios from "axios";
 
 
 export function MsgBar() {
-    socket.connect()
+    socket.connect();
+    const { setAdmMsg } = useContext(ModalContext);
+    const [ chatTicket, Setchat ] = useState('');
     const [ Msg, SetMsg ] = useState('');
+
     function name() {
         socket.connect()
         var token = localStorage.getItem('token');
 
         if (token) {
             const decoded = jwt_decode(token);
-            console.log('this is decoded: ', decoded.adm_id);
+            console.log('this is decoded: ', decoded.user_CPF);
             
-            console.log(socket.connected);
+            console.log(socket.connected)
             
-            socket.emit("userMensage", Msg, decoded.adm_id,'Admin', (error) => {
+            socket.emit("userMensage", Msg, decoded.user_CPF,'Admin', (error) => {
+                setAdmMsg(Msg)
                 console.log('messagem enviada!');
                 if (error) {
                     console.log(error);
@@ -29,16 +34,7 @@ export function MsgBar() {
         };
     }
 
-    setTimeout(() => {
-        console.log('recived!');
 
-        socket.on("userMensage", (message) => {
-           
-            console.log('messagem recebida: ', message);
-            
-        });
-          
-    }, 2000);
 
     return(
         <>

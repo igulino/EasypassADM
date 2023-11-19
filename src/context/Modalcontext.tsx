@@ -9,7 +9,9 @@ interface ModalContextType {
     setAdmData: (admData: any) => void;
     Ticket?: any;
     setTicket?: (ticket: any) => void;
-    fundo?: any
+    fundo?: any;
+    setAdmMsg: (admMsg: any) => void;
+    Msg?: any;
 }
 
 const ModalContext = createContext<ModalContextType>({
@@ -21,7 +23,9 @@ const ModalContext = createContext<ModalContextType>({
     setAdmData: () => {},
     Ticket: null, 
     setTicket: () => {},
-    fundo: null
+    fundo: null,
+    setAdmMsg: () => {},
+    Msg: null, 
 });
 
 export default ModalContext;

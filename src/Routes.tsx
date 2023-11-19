@@ -15,6 +15,8 @@ function Rotas() {
     const [verify, setVerify] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
     const [admData, setAdmData] = useState<Array<object> | null>(null);
+    const [Msg, setAdmMsg] = useState('');  
+
     const themes = createTheme({
         palette: {
             mode: darkMode ? 'dark' : 'light',
@@ -89,7 +91,9 @@ function Rotas() {
                                 setAdmData,
                                 Ticket,
                                 setTicket,
-                                fundo
+                                fundo,
+                                setAdmMsg,
+                                Msg
                             }}>
                                 <React.Fragment>
                                     <Routes>

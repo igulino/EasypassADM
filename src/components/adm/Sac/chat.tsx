@@ -72,7 +72,7 @@ export function Chat() {
             <TextField variant="standard" label="Pesquisar..."/>
         </Box>
         { test != undefined ? (
-          test.map((x, index) => {
+          test.map((x, index) => {    
             return (
               <Card 
                 onClick={() =>{setTicket(x[0].sac_sac_ticket)}}

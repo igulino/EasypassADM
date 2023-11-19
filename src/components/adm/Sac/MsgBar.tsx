@@ -9,7 +9,7 @@ import axios from "axios";
 
 export function MsgBar() {
     socket.connect();
-    const { setAdmMsg } = useContext(ModalContext);
+    const { setAdmMsg, Ticket } = useContext(ModalContext);
     const [ chatTicket, Setchat ] = useState('');
     const [ Msg, SetMsg ] = useState('');
 
@@ -19,11 +19,11 @@ export function MsgBar() {
 
         if (token) {
             const decoded = jwt_decode(token);
-            console.log('this is decoded: ', decoded.user_CPF);
+            console.log('this is decoded: ', decoded);
             
             console.log(socket.connected)
             
-            socket.emit("userMensage", Msg, decoded.user_CPF,'Admin', (error) => {
+            socket.emit("userMensage", Msg, decoded.adm_id,'Admin', Ticket, (error) => {
                 setAdmMsg(Msg)
                 console.log('messagem enviada!');
                 if (error) {

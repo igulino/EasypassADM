@@ -11,7 +11,7 @@ export function Msg() {
   const [ chatTicket, Setchat ] = useState('');
 
    async function communicate() {
-        taker(await axios.post('http://localhost:3344/message', {
+        taker(await axios.post('https://easypass-iak1.onrender.com/message', {
             sac_sac_ticket: Ticket
         }))
       console.log('this is take: ', take);

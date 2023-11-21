@@ -29,7 +29,7 @@ export function Chat() {
 
     async function call() {
         
-        SetmenTicket(await axios.get('http://localhost:3344/admSac'));
+        SetmenTicket(await axios.get('https://easypass-iak1.onrender.com/admSac'));
         if (menTicket.data != undefined) {
           /*for (let index = 0; index < MessageData.length; index++) {
                 

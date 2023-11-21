@@ -2,7 +2,7 @@ import axios  from "axios";
 
 export async function AdmLogin(email: any, password: any) {
 
-    const resp = await axios.post('http://localhost:3344/admlogin', {
+    const resp = await axios.post('https://easypass-iak1.onrender.com/admlogin', {
         email: email,
         password: password
     })
@@ -19,7 +19,7 @@ export async function AdmLogin(email: any, password: any) {
 
 export async function EmpresaLogin(cnpj: any, password: any) {
 
-    const resp = await axios.post('http://localhost:3344/busslogin', {
+    const resp = await axios.post('https://easypass-iak1.onrender.com/busslogin', {
         cnpj: cnpj,
         password: password
     })

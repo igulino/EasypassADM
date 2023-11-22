@@ -1,4 +1,4 @@
-import { Box, Card, TextField } from "@mui/material";
+import { Box, Card, TextField, Button, Container, Grid,} from "@mui/material";
 import { useEffect, useState, useContext } from "react"
 import { Btn } from "../../bases/buttons/Button";
 import { socket } from "../../../socket.io";
@@ -12,9 +12,11 @@ export function MsgBar() {
     const { setAdmMsg, Ticket } = useContext(ModalContext);
     const [ chatTicket, Setchat ] = useState('');
     const [ Msg, SetMsg ] = useState('');
+    const [ bool, Setbool ] = useState(Boolean);
 
     function name() {
         socket.connect()
+        Setbool(true);
         var token = localStorage.getItem('token');
 
         if (token) {
@@ -38,19 +40,7 @@ export function MsgBar() {
 
     return(
         <>
-        <Box sx={{
-            position: 'absolute'
-        }}>
-            <TextField variant="outlined" color="success" label='Digite sua Mensagem...' onChange={i => SetMsg(i.target.value)} value={Msg} sx={{
-                width: '45vw',
-                marginTop:'92vh',
-                ml: '45vw',
-                position: 'absolute'
-            }} />
-            <Btn bc="blue" cl='green' ml='90vw' fun={name} name=">>" Mt="94vh" vis='visible' sx={{
-                position: 'relative',
-            }}></Btn>
-        </Box>
-        </>
+         
+    </>
     )
 }

@@ -63,7 +63,7 @@ export function Chat() {
       <Box
         sx={{
           backgroundColor: "red",
-          height: "100vh",
+          height: "92.7vh",
           width: "25vw",
           ml: "20vw",
           position: 'relative'

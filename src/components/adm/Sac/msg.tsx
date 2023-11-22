@@ -1,5 +1,6 @@
 import { Box, Typography, Card, Grid, Container, TextField, Button} from "@mui/material";
 import { useContext, useEffect, useState, useRef} from "react";
+import jwt_decode from "jwt-decode";
 import { socket } from "../../../socket.io/index";
 import ModalContext from "../../../context/Modalcontext";
 import axios from "axios";
@@ -86,7 +87,7 @@ export function Msg() {
     <>
     <Box id="chat" sx={{
         height: '92.7vh',
-        width: '50vw',
+        width: '55vw',
         position: 'relative',
         overflowX: 'hidden',
         overflowY: 'hidden'

@@ -12,7 +12,7 @@ export function Sac() {
         }}>
             <Chat />
             <Msg />
-            <MsgBar />
+           
             <MenuLateral />
         </Box>
     )

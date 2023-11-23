@@ -62,14 +62,19 @@ export function Chat() {
     <>
       <Box
         sx={{
-          backgroundColor: "red",
-          height: "92.7vh",
+          backgroundColor: "blue",
+          height: "100vh",
           width: "25vw",
           ml: "20vw",
           position: 'relative'
         }}>
-        <Box>
-            <TextField variant="standard" label="Pesquisar..."/>
+        <Box
+        sx={{
+          mb:'2vh'
+        }}>
+            <TextField variant="standard" label="Pesquisar..." sx={{
+              ml:'2vw'
+            }}/>
         </Box>
         { test != undefined ? (
           test.map((x, index) => {    
@@ -78,11 +83,18 @@ export function Chat() {
                 onClick={() =>{setTicket(x[0].sac_sac_ticket)}}
                 key={x[0].sac_sac_ticket}
                 sx={{
-                  height: '10vh',
-                  width: '20vw',
+                  height: '5vh',
+                  width: '22vw',
                   position: 'absolute',
+                  ml: "1vw",
+                  fontFamily:"Arial",
                   zIndex: 1,
-                  mt: `${index * 15}vh`
+                  mt: `${index * 7}vh`,
+                  cursor: 'pointer',
+                  "&:hover": {
+                    backgroundColor: "rgb(50, 50, 50)",
+                    color: "white"
+                  },
                 }}
               > 
                 {x[0].sacmen_texto}

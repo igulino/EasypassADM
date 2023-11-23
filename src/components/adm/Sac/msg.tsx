@@ -17,23 +17,28 @@ export function Msg() {
   const messagesContainerRef = useRef<HTMLDivElement>(null);;
   
   const { setAdmMsg } = useContext(ModalContext);
-  const [ chatTicket, Setchat ] = useState('');
+  //const [ chatTicket, Setchat ] = useState('');
   const [ Msg, SetMsg ] = useState('');
-  const [ bool, Setbool ] = useState(Boolean);
-
+  const [ bool, Setbool ] = useState(false);
+  
+  useEffect(() =>{
+    Setbool(true)
+    console.log('bolzada', bool);
+  }, [Msg])
+  
     function name() {
-        socket.connect()
-        Setbool(true);
+        
+        Setbool(false)
         var token = localStorage.getItem('token');
 
         if (token) {
             const decoded = jwt_decode(token);
             console.log('this is decoded: ', decoded);
-            
             console.log(socket.connected)
             
-            socket.emit("userMensage", Msg, decoded.adm_id,'Admin', Ticket, (error) => {
-                setAdmMsg(Msg)
+            socket.emit("userMensage", Msg, decoded.adm_id,'1', 'Admin', Ticket, (error) => {
+               
+                
                 console.log('messagem enviada!');
                 if (error) {
                     console.log(error);
@@ -52,22 +57,28 @@ export function Msg() {
     }
     //só fzr as mnsgs do adm irem pro banco e voltarem formatadas da mesma forma que a dos user
     
-    setTimeout(() => {
+    useEffect(()=>{
+    console.log('sdadasdad');
+    
+   }, [socket.on("userMensage", (message) => {
+    count++
+    console.log('messagem recebida: ', message[0].sac_sac_ticket);
+    
+    if (Ticket == message[0].sac_sac_ticket && count > 2){
+     console.log('boooua');
+     
+      taker(message)
+    }
+    
+    
+  })])
+      let count = 0;
       console.log('recived!', socket.connected);
-      socket.on("userMensage", (message) => {
-        console.log('messagem recebida: ', message[0].sac_sac_ticket);
-        
-        if (Ticket == message[0].sac_sac_ticket && message != 'admin'){
-         
-          taker(message)
-        }
-        
-        
-      });
       
-  }, 2000);
+  
   //console.log('messagem recebida: ', take);
-  useEffect(() =>{communicate()}, [Ticket]);
+  useEffect(() =>{communicate(); console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+  }, [Ticket]);
   useEffect(() => {
     setTimeout(() => {
       messagesContainerRef.current?.scrollIntoView({
@@ -90,7 +101,8 @@ export function Msg() {
         width: '55vw',
         position: 'relative',
         overflowX: 'hidden',
-        overflowY: 'hidden'
+        overflowY: 'hidden',
+        
       }}>
     <Grid sx={{
           height: '100%',
@@ -103,15 +115,18 @@ export function Msg() {
             flexDirection: 'column',
             alignItems: 'flex-end',
             overflowY: "auto",
-            height: take ? '88%' : '80%'
+            height: take ? '90%' : '80%',
+            
           }}>
       <div
               style={{
                 height: "100%",
-                position: "relative"
+                width: "100%",
+                position: "relative",
+                
               }}>
     
-                { take != null ? (
+                { take != null ?  (
                   take.data != undefined ? (
                     take.data.map((x) => {
                       console.log('exo kun: ', x.sacmen_texto);
@@ -120,6 +135,7 @@ export function Msg() {
                           <Card 
                           key={x.sacmen_id}
                           sx={{
+                            
                             height: 'auto',
                             width: 'auto',
                             display: "table",
@@ -128,8 +144,8 @@ export function Msg() {
                             paddingBottom: 2,
                             //position: 'absolute',
                             //zIndex: 1,
-                            ml: '30vw',
-                            mt: `${x.sacmen_id * 1}vh`
+                            ml: 'auto',
+                            mt: '2vh'
                           }}
                         > <Container>
                         <Typography
@@ -160,7 +176,7 @@ export function Msg() {
                             paddingBottom: 2,
                             //position: 'absolute',
                             //zIndex: 1,
-                            mt: `${x.sacmen_id * 1}vh`
+                            mt: '2vh'
                           }}
                         >   
                            <Container>
@@ -182,6 +198,7 @@ export function Msg() {
                     })
 
                   ):(
+                   
                     take.map((x) => {
                       console.log('exo kun: ', x.sacmen_texto);
                       if (x.admin_adm_id) {
@@ -198,8 +215,8 @@ export function Msg() {
                             paddingBottom: 2,
                             //position: 'absolute',
                             //zIndex: 1,
-                            ml: '30vw',
-                            mt: `${x.sacmen_id * 1}vh`
+                            ml: 'auto',
+                            mt: '2vh'
                           }}
                         > 
                       <Container>
@@ -223,7 +240,7 @@ export function Msg() {
                         <Card 
                           key={x.sacmen_id}
                           sx={{
-                            ml: 'auto',
+                           
                             height: 'auto',
                             width: "auto",
                             maxWidth: "100%",
@@ -233,7 +250,7 @@ export function Msg() {
                             paddingBottom: 2,
                             //position: 'absolute',
                             //zIndex: 1,
-                            mt: `${x.sacmen_id * 1}vh`
+                            mt: '2vh'
                           }}
                         > 
                       <Container>
@@ -261,8 +278,8 @@ export function Msg() {
 
         <Container sx={{
             height: '10vh',
-            ml: 3,
-            marginBottom: '20px', // Ajuste conforme necessário
+            
+            marginBottom: '2vh', // Ajuste conforme necessário
             display: 'flex',
             alignItems: 'center',
           }}>
@@ -273,20 +290,14 @@ export function Msg() {
               label="Digite sua Mensagem..."
               onChange={i => SetMsg(i.target.value)}
               value={Msg}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  event.preventDefault();
-                  name();
-                }
-              }}
               sx={{
-                width: "30vw",
+                width: "50vw",
               }}
             />
 
             <Button
-              disabled={bool === undefined ? false : bool }
               variant="contained"
+              
               onClick={name}
               sx={{
                 width: "6%",

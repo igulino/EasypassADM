@@ -105,6 +105,7 @@ export default function MenuLateral() {
                     ))}
                 </Toolbar>
             </Container>
+            
         </AppBar>
     );
 }

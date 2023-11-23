@@ -66,6 +66,7 @@ export function Chat() {
           height: "100vh",
           width: "25vw",
           ml: "20vw",
+          border: '1',
           position: 'relative'
         }}>
         <Box
@@ -93,7 +94,7 @@ export function Chat() {
                   cursor: 'pointer',
                   "&:hover": {
                     backgroundColor: "rgb(50, 50, 50)",
-                    color: "white"
+                    color: "rgb(135, 176, 153)"
                   },
                 }}
               > 

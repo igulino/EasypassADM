@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { socket } from "../../../socket.io/index";
 import ModalContext from "../../../context/Modalcontext";
 import axios from "axios";
+import { Key } from "@mui/icons-material";
 
 
 //cpf: 43424546765
@@ -97,7 +98,7 @@ export function Msg() {
   return (
     <>
     <Box id="chat" sx={{
-        height: '92.7vh',
+        height: '100vh',
         width: '55vw',
         position: 'relative',
         overflowX: 'hidden',
@@ -292,6 +293,13 @@ export function Msg() {
               value={Msg}
               sx={{
                 width: "50vw",
+              }}
+              onKeyDown={(event)=>{
+                if (event.key === "Enter"){
+                  event.preventDefault();
+                  name();
+                  SetMsg('');
+                }
               }}
             />
 

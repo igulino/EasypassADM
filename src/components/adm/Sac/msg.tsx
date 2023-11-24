@@ -1,84 +1,97 @@
-import { Box, Typography, Card, Grid, Container, TextField, Button} from "@mui/material";
-import { useContext, useEffect, useState, useRef} from "react";
+import {
+  Box,
+  Typography,
+  Card,
+  Grid,
+  Container,
+  TextField,
+  Button,
+} from "@mui/material";
+import { useContext, useEffect, useState, useRef } from "react";
 import jwt_decode from "jwt-decode";
 import { socket } from "../../../socket.io/index";
 import ModalContext from "../../../context/Modalcontext";
 import axios from "axios";
 import { Key } from "@mui/icons-material";
-
+import SendIcon from "@mui/icons-material/Send";
 
 //cpf: 43424546765
 //senha do usuário teste
 //#SouUsuario1
 
 export function Msg() {
-  socket.connect()
+  socket.connect();
   const { Ticket } = useContext(ModalContext);
-  const [ take, taker ] = useState<any>([]);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);;
-  
+  const [take, taker] = useState<any>([]);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+
   const { setAdmMsg } = useContext(ModalContext);
   //const [ chatTicket, Setchat ] = useState('');
-  const [ Msg, SetMsg ] = useState('');
-  const [ bool, Setbool ] = useState(false);
-  
-  useEffect(() =>{
-    Setbool(true)
-    console.log('bolzada', bool);
-  }, [Msg])
-  
-    function name() {
-        
-        Setbool(false)
-        var token = localStorage.getItem('token');
+  const [Msg, SetMsg] = useState("");
+  const [bool, Setbool] = useState(false);
 
-        if (token) {
-            const decoded = jwt_decode(token);
-            console.log('this is decoded: ', decoded);
-            console.log(socket.connected)
-            
-            socket.emit("userMensage", Msg, decoded.adm_id,'1', 'Admin', Ticket, (error) => {
-               
-                
-                console.log('messagem enviada!');
-                if (error) {
-                    console.log(error);
-                }
-            })
-            
-        };
-    }
+  useEffect(() => {
+    Setbool(true);
+    console.log("bolzada", bool);
+  }, [Msg]);
 
-   async function communicate() {
-        taker(await axios.post('https://easypass-iak1.onrender.com/message', {
-            sac_sac_ticket: Ticket
-        }))
-      console.log('this is take: ', take);
-        
+  function name() {
+    Setbool(false);
+    var token = localStorage.getItem("token");
+
+    if (token) {
+      const decoded = jwt_decode(token);
+      console.log("this is decoded: ", decoded);
+      console.log(socket.connected);
+
+      socket.emit(
+        "userMensage",
+        Msg,
+        decoded.adm_id,
+        "1",
+        "Admin",
+        Ticket,
+        (error) => {
+          console.log("messagem enviada!");
+          if (error) {
+            console.log(error);
+          }
+        }
+      );
     }
-    //só fzr as mnsgs do adm irem pro banco e voltarem formatadas da mesma forma que a dos user
-    
-    useEffect(()=>{
-    console.log('sdadasdad');
-    
-   }, [socket.on("userMensage", (message) => {
-    count++
-    console.log('messagem recebida: ', message[0].sac_sac_ticket);
-    
-    if (Ticket == message[0].sac_sac_ticket && count > 2){
-     console.log('boooua');
-     
-      taker(message)
-    }
-    
-    
-  })])
-      let count = 0;
-      console.log('recived!', socket.connected);
-      
-  
+  }
+
+  async function communicate() {
+    taker(
+      await axios.post("https://easypass-iak1.onrender.com/message", {
+        sac_sac_ticket: Ticket,
+      })
+    );
+    console.log("this is take: ", take);
+  }
+  //só fzr as mnsgs do adm irem pro banco e voltarem formatadas da mesma forma que a dos user
+
+  useEffect(() => {
+    console.log("sdadasdad");
+  }, [
+    socket.on("userMensage", (message) => {
+      count++;
+      console.log("messagem recebida: ", message[0].sac_sac_ticket);
+
+      if (Ticket == message[0].sac_sac_ticket && count > 2) {
+        console.log("boooua");
+
+        taker(message);
+      }
+    }),
+  ]);
+  let count = 0;
+  console.log("recived!", socket.connected);
+
   //console.log('messagem recebida: ', take);
-  useEffect(() =>{communicate(); console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+  useEffect(() => {
+    communicate();
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaa");
   }, [Ticket]);
   useEffect(() => {
     setTimeout(() => {
@@ -93,226 +106,232 @@ export function Msg() {
         });
       }, 1000);
     }, 1000);
-
   }, [take.length]);
   return (
     <>
-    <Box id="chat" sx={{
-        height: '100vh',
-        width: '55vw',
-        position: 'relative',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
-        
-      }}>
-    <Grid sx={{
-          height: '100%',
-          flex: 1,
-        }}>
-    <Container sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            overflowY: "auto",
-            height: take ? '90%' : '80%',
-            
-          }}>
-      <div
+      <Box
+        id="chat"
+        sx={{
+          height: "100vh",
+          width: "55vw",
+          position: "relative",
+          overflowX: "hidden",
+          overflowY: "hidden",
+        }}
+      >
+        <Grid
+          sx={{
+            height: "100%",
+            flex: 1,
+          }}
+        >
+          <Container
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              overflowY: "auto",
+              height: take ? "90%" : "80%",
+            }}
+          >
+            <div
               style={{
                 height: "100%",
                 width: "100%",
                 position: "relative",
-                
-              }}>
-    
-                { take != null ?  (
-                  take.data != undefined ? (
-                    take.data.map((x) => {
-                      console.log('exo kun: ', x.sacmen_texto);
+              }}
+            >
+              {take != null
+                ? take.data != undefined
+                  ? take.data.map((x) => {
+                      console.log("exo kun: ", x.sacmen_texto);
                       if (x.admin_adm_id) {
-                        return(
-                          <Card 
-                          key={x.sacmen_id}
-                          sx={{
-                            
-                            height: 'auto',
-                            width: 'auto',
-                            display: "table",
-                            backgroundColor: "rgb(50, 50, 50)",
-                            paddingTop: 2,
-                            paddingBottom: 2,
-                            //position: 'absolute',
-                            //zIndex: 1,
-                            ml: 'auto',
-                            mt: '2vh'
-                          }}
-                        > <Container>
-                        <Typography
-                          style={{
-                            wordWrap: "break-word",
-                            maxWidth: "30vw",
-                            color: "white",
-                            textAlign: 'left', // Alinha o texto à direita
-                          }}
-                        >
-                          {x.sacmen_texto}
-                        </Typography>
-                        </Container>
-                        <div ref={messagesContainerRef}></div>
-                        </Card>
-                        )
-                      }else
-                      return (
-                        <Card 
-                          key={x.sacmen_id}
-                          sx={{
-                            height: 'auto',
-                            maxWidth: "100%",
-                            width: 'auto',
-                            display: "table",
-                            backgroundColor: "rgb(50, 50, 50)",
-                            paddingTop: 2,
-                            paddingBottom: 2,
-                            //position: 'absolute',
-                            //zIndex: 1,
-                            mt: '2vh'
-                          }}
-                        >   
-                           <Container>
+                        return (
+                          <Card
+                            key={x.sacmen_id}
+                            sx={{
+                              height: "auto",
+                              width: "auto",
+                              display: "table",
+                              backgroundColor: "rgb(50, 50, 50)",
+                              paddingTop: 2,
+                              paddingBottom: 2,
+                              //position: 'absolute',
+                              //zIndex: 1,
+                              ml: "auto",
+                              mt: "2vh",
+                            }}
+                          >
+                            {" "}
+                            <Container>
                               <Typography
                                 style={{
                                   wordWrap: "break-word",
                                   maxWidth: "30vw",
                                   color: "white",
-                                  textAlign: 'left', // Alinha o texto à direita
+                                  textAlign: "left", // Alinha o texto à direita
                                 }}
                               >
                                 {x.sacmen_texto}
                               </Typography>
-                          </Container>
-                          <div ref={messagesContainerRef}></div>
-                        </Card>
-                      );
-                      
+                            </Container>
+                            <div ref={messagesContainerRef}></div>
+                          </Card>
+                        );
+                      } else
+                        return (
+                          <Card
+                            key={x.sacmen_id}
+                            sx={{
+                              height: "auto",
+                              maxWidth: "100%",
+                              width: "auto",
+                              display: "table",
+                              backgroundColor: "rgb(50, 50, 50)",
+                              paddingTop: 2,
+                              paddingBottom: 2,
+                              //position: 'absolute',
+                              //zIndex: 1,
+                              mt: "2vh",
+                            }}
+                          >
+                            <Container>
+                              <Typography
+                                style={{
+                                  wordWrap: "break-word",
+                                  maxWidth: "30vw",
+                                  color: "white",
+                                  textAlign: "left", // Alinha o texto à direita
+                                }}
+                              >
+                                {x.sacmen_texto}
+                              </Typography>
+                            </Container>
+                            <div ref={messagesContainerRef}></div>
+                          </Card>
+                        );
                     })
-
-                  ):(
-                   
-                    take.map((x) => {
-                      console.log('exo kun: ', x.sacmen_texto);
+                  : take.map((x) => {
+                      console.log("exo kun: ", x.sacmen_texto);
                       if (x.admin_adm_id) {
-                        return(
-                          <Card 
-                          key={x.sacmen_id}
-                          sx={{
-                            height: 'auto',
-                            width: 'auto',
-                            maxWidth: "100%",
-                            display: "table",
-                            backgroundColor: "rgb(50, 50, 50)",
-                            paddingTop: 2,
-                            paddingBottom: 2,
-                            //position: 'absolute',
-                            //zIndex: 1,
-                            ml: 'auto',
-                            mt: '2vh'
-                          }}
-                        > 
-                      <Container>
-                        <Typography
-                          style={{
-                            wordWrap: "break-word",
-                            maxWidth: "30vw",
-                            color: "white",
-                            textAlign: 'left', // Alinha o texto à direita
-                          }}
-                        >
-                          {x.sacmen_texto}
-                        </Typography>
-                      </Container>
-                      <div ref={messagesContainerRef}></div>
-                        </Card>
-                        )
-                      }else
-                      
-                      return (
-                        <Card 
-                          key={x.sacmen_id}
-                          sx={{
-                           
-                            height: 'auto',
-                            width: "auto",
-                            maxWidth: "100%",
-                            display: "table",
-                            backgroundColor: "rgb(50, 50, 50)",
-                            paddingTop: 2,
-                            paddingBottom: 2,
-                            //position: 'absolute',
-                            //zIndex: 1,
-                            mt: '2vh'
-                          }}
-                        > 
-                      <Container>
-                        <Typography
-                          style={{
-                            wordWrap: "break-word",
-                            maxWidth: "30vw",
-                            color: "white",
-                            textAlign: 'left', // Alinha o texto à direita
-                          }}
-                        >
-                          {x.sacmen_texto}
-                        </Typography>
-                      </Container>
-                      <div ref={messagesContainerRef}></div>
-                        </Card>
-                      );
-                      
+                        return (
+                          <Card
+                            key={x.sacmen_id}
+                            sx={{
+                              height: "auto",
+                              width: "auto",
+                              maxWidth: "100%",
+                              display: "table",
+                              backgroundColor: "rgb(50, 50, 50)",
+                              paddingTop: 2,
+                              paddingBottom: 2,
+                              //position: 'absolute',
+                              //zIndex: 1,
+                              ml: "auto",
+                              mt: "2vh",
+                            }}
+                          >
+                            <Container>
+                              <Typography
+                                style={{
+                                  wordWrap: "break-word",
+                                  maxWidth: "30vw",
+                                  color: "white",
+                                  textAlign: "left", // Alinha o texto à direita
+                                }}
+                              >
+                                {x.sacmen_texto}
+                              </Typography>
+                            </Container>
+                            <div ref={messagesContainerRef}></div>
+                          </Card>
+                        );
+                      } else
+                        return (
+                          <Card
+                            key={x.sacmen_id}
+                            sx={{
+                              height: "auto",
+                              width: "auto",
+                              maxWidth: "100%",
+                              display: "table",
+                              backgroundColor: "rgb(50, 50, 50)",
+                              paddingTop: 2,
+                              paddingBottom: 2,
+                              //position: 'absolute',
+                              //zIndex: 1,
+                              mt: "2vh",
+                            }}
+                          >
+                            <Container>
+                              <Typography
+                                style={{
+                                  wordWrap: "break-word",
+                                  maxWidth: "30vw",
+                                  color: "white",
+                                  textAlign: "left", // Alinha o texto à direita
+                                }}
+                              >
+                                {x.sacmen_texto}
+                              </Typography>
+                            </Container>
+                            <div ref={messagesContainerRef}></div>
+                          </Card>
+                        );
                     })
-                  )
-                    ):('Erro de conexão')}
-                
-        </div>
-        </Container>
+                : "Erro de conexão"}
+            </div>
+          </Container>
 
-        <Container sx={{
-            height: '10vh',
-            
-            marginBottom: '2vh', // Ajuste conforme necessário
-            display: 'flex',
-            alignItems: 'center',
-          }}>
+          <Container
+            sx={{
+              height: "10vh",
 
+              marginBottom: "2vh", // Ajuste conforme necessário
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <TextField
               variant="outlined"
               color="success"
               label="Digite sua Mensagem..."
-              onChange={i => SetMsg(i.target.value)}
+              onChange={(i) => SetMsg(i.target.value)}
               value={Msg}
               sx={{
                 width: "50vw",
               }}
-              onKeyDown={(event)=>{
-                if (event.key === "Enter"){
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
                   event.preventDefault();
                   name();
-                  SetMsg('');
+                  SetMsg("");
                 }
               }}
             />
-
-            <Button
-              variant="contained"
-              
+            <Box
               onClick={name}
               sx={{
-                width: "6%",
-                height: "6.5vh",
+                width: "4vw",
+                height: "5.5vh",
                 ml: "0.5vw",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "#1976D2",
+                cursor: "pointer",
+                borderRadius: "5px",
+                "&:hover": {
+                  background: "#1565C0",
+                },
               }}
-            />
+            >
+              <SendIcon sx={{
+                color: "#fff",
+              }} />
+            </Box>
           </Container>
         </Grid>
       </Box>

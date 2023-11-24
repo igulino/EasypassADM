@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react"
 import ModalContext from "../../../context/Modalcontext";
 import { TakeTicket } from "../../../props";
+import React from "react";
 
 export function Chat() {
   const { Ticket, setTicket } = useContext(ModalContext);
@@ -62,19 +63,22 @@ export function Chat() {
     <>
       <Box
         sx={{
-          backgroundColor: "blue",
           height: "100vh",
           width: "25vw",
           ml: "20vw",
           border: '1',
-          position: 'relative'
+          position: 'relative',
+          background: 'linear-gradient(180deg, #ECEBEB 1%, #fff 99%)',
+          boxShadow: '2px 0px 6px rgba(0, 0, 0, 0.6)',
         }}>
         <Box
         sx={{
           mb:'2vh'
         }}>
             <TextField variant="standard" label="Pesquisar..." sx={{
-              ml:'2vw'
+              ml:'2vw',
+              width:'20vw',
+              background: "transparent",
             }}/>
         </Box>
         { test != undefined ? (
